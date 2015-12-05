@@ -1,0 +1,12 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Button dimensions per Material Design guidelines. -->
+    <dimen name="md_button_padding">8dp</dimen>
+    <dimen name="md_button_minWidth">64dp</dimen>
+    <dimen name="md_button_minHeight">36dp</dimen>
+    <dimen name="md_button_horz_margin">4dp</dimen>
+    <dimen name="md_button_vert_margin">6dp</dimen>
+</resources>

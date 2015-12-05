@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">
+        تمتع مع العربية
+    </string>
+    <string name="title_activity_game">Dummy name</string>
+    <string name="btnBack"><![CDATA[<-]]></string>
+    <string name="start">إبدا</string>
+    <string name="exit">اخرج</string>
+    <string name="aboutus">عن البرنامج</string>
+    <string name="titleInstruction">
+        قم باختيار اللإجابة الصحيحة مكان الفراغ
+    </string>
+    <string name="btnNew">التالي</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-0316579751852810/7543302676</string>
+
+</resources>

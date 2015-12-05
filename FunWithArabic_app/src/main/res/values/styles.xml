@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015. Fahad Alduraibi
+  ~ http://www.fadvisor.net
+  -->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.NoTitleBar.Fullscreen">
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="button_selection" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_blue1</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingRight">@dimen/md_button_padding</item>
+        <item name="android:paddingLeft">@dimen/md_button_padding</item>
+        <item name="android:minWidth">@dimen/md_button_minWidth</item>
+        <item name="android:minHeight">@dimen/md_button_minHeight</item>
+        <item name="android:layout_marginRight">@dimen/md_button_horz_margin</item>
+        <item name="android:layout_marginLeft">@dimen/md_button_horz_margin</item>
+        <item name="android:layout_marginTop">@dimen/md_button_vert_margin</item>
+        <item name="android:layout_marginBottom">@dimen/md_button_vert_margin</item>
+    </style>
+
+    <style name="style_btn_blue1" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_blue1</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingRight">@dimen/md_button_padding</item>
+        <item name="android:paddingLeft">@dimen/md_button_padding</item>
+        <item name="android:minWidth">@dimen/md_button_minWidth</item>
+        <item name="android:minHeight">@dimen/md_button_minHeight</item>
+        <item name="android:layout_marginRight">@dimen/md_button_horz_margin</item>
+        <item name="android:layout_marginLeft">@dimen/md_button_horz_margin</item>
+        <item name="android:layout_marginTop">@dimen/md_button_vert_margin</item>
+        <item name="android:layout_marginBottom">@dimen/md_button_vert_margin</item>
+    </style>
+
+    <style name="style_btn_blue2" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/button_blue2</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingRight">@dimen/md_button_padding</item>
+        <item name="android:paddingLeft">@dimen/md_button_padding</item>
+        <item name="android:minWidth">@dimen/md_button_minWidth</item>
+        <item name="android:minHeight">@dimen/md_button_minHeight</item>
+        <item name="android:layout_marginRight">@dimen/md_button_horz_margin</item>
+        <item name="android:layout_marginLeft">@dimen/md_button_horz_margin</item>
+        <item name="android:layout_marginTop">@dimen/md_button_vert_margin</item>
+        <item name="android:layout_marginBottom">@dimen/md_button_vert_margin</item>
+    </style>
+
+</resources>

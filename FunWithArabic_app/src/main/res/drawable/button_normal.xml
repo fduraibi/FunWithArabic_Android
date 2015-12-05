@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Disabled -->
+    <item android:state_enabled="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <solid android:color="#bdbdbd" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+
+    <!-- Pressed -->
+    <item android:state_enabled="true" android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+                    <corners android:radius="2dp" />
+                    <solid android:color="#C0C0C0" />
+                </shape>
+            </item>
+            <item android:left="2dp" android:top="2dp" android:bottom="2dp" android:right="2dp">
+                <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+                    <solid android:color="#1e88e5" />
+                    <corners android:radius="2dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- Focused -->
+    <item android:state_enabled="true" android:state_focused="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <solid android:color="#42a5f5" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+
+    <!-- Enabled -->
+    <item android:state_enabled="true">
+        <layer-list>
+            <item android:left="1dp" android:top="1dp">
+                <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+                    <corners android:radius="2dp" />
+                    <solid android:color="#D6D6D6" />
+                </shape>
+            </item>
+            <item android:bottom="1dp" android:right="1dp">
+                <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+                    <solid android:color="#64b5f6" />
+                    <corners android:radius="2dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>
