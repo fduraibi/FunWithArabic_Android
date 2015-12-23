@@ -217,16 +217,19 @@ public class GameActivity extends Activity {
     public void onBackPressed() {
         //super.onBackPressed();
 
+        // Warn the player that exiting will cancel the score!! or maybe save the score and allow resuming
+
+        // Add all strings to language strings to allow translations
         new AlertDialog.Builder(this)
-                .setMessage("Are you sure you want to exit?")
+                .setMessage("هل انت متاكد؟")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                         overridePendingTransition(R.animator.activity_anime2reverse, R.animator.activity_anime1reverse);
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton("لا", null)
                 .show();
     }
 }

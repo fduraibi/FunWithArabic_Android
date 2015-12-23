@@ -36,7 +36,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void createDataBase() throws IOException {
-        //By calling this method and empty database will be created into the default system path
+        //By calling this method an empty database will be created into the default system path
         //of the application so we are gonna be able to overwrite that database with our database.
 //        this.getReadableDatabase();
 //        this.getWritableDatabase();
