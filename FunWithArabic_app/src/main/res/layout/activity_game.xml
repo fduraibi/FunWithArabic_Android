@@ -15,48 +15,6 @@
 
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="الإجابات الصحيحة"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentTop="true"
-        android:background="#99ffffff"
-        android:textColor="@color/black"
-        android:layout_toLeftOf="@+id/textView4"
-        android:gravity="center"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="النتيجة"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="#99ffffff"
-        android:textColor="@color/black"/>
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="الإجابات الخاطئة"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentTop="true"
-        android:background="#99ffffff"
-        android:textColor="@color/black"
-        android:layout_alignLeft="@+id/wrong_ans_count"
-        android:layout_alignStart="@+id/wrong_ans_count"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"/>
-
-
-
-    <TextView
         android:id="@+id/txtQInfo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -65,10 +23,10 @@
         android:text="@string/titleInstruction"
         android:textColor="#ff000000"
         android:textSize="20sp"
-        android:layout_above="@+id/txtQ"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="#99ffffff"/>
+        android:background="#b4ffffff"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/txtQ"
@@ -83,8 +41,8 @@
         android:textSize="40sp"
         android:background="@drawable/q_background"
         android:layout_alignTop="@+id/txtQT"
-        android:layout_alignRight="@+id/btnNew"
-        android:layout_alignEnd="@+id/btnNew"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <TextView
         android:id="@+id/txtQT"
@@ -98,9 +56,9 @@
         android:textIsSelectable="false"
         android:textSize="40sp"
         android:background="@drawable/qt_background"
-        android:layout_above="@+id/btn0"
-        android:layout_alignRight="@+id/btnNew"
-        android:layout_alignEnd="@+id/btnNew"/>
+        android:layout_below="@+id/txtQInfo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/btn0"
@@ -109,9 +67,9 @@
         android:layout_height="wrap_content"
         android:onClick="ButtonsOnClick"
         android:text="New Button 0"
-        android:layout_above="@+id/btn1"
-        android:layout_alignRight="@+id/wrong_ans_count"
-        android:layout_alignEnd="@+id/wrong_ans_count"/>
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/btn1"
@@ -120,9 +78,9 @@
         android:layout_height="wrap_content"
         android:onClick="ButtonsOnClick"
         android:text="New Button 1"
-        android:layout_above="@+id/btn2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_below="@+id/btn0"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/btn2"
@@ -131,7 +89,7 @@
         android:layout_height="wrap_content"
         android:onClick="ButtonsOnClick"
         android:text="New Button 2"
-        android:layout_above="@+id/btn3"
+        android:layout_below="@+id/btn1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
@@ -143,8 +101,9 @@
         android:onClick="ButtonsOnClick"
         android:text="New Button 3"
 
-        android:layout_above="@+id/btnNew"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/btn2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:id="@+id/btnNew"
@@ -154,9 +113,13 @@
 
         android:onClick="ButtonsOnClick"
         android:text="@string/btnNew"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/wrong_ans_count"
-        android:layout_alignEnd="@+id/wrong_ans_count"/>
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_below="@+id/btn3"
+        android:layout_alignRight="@+id/btn3"
+        android:layout_alignEnd="@+id/btn3"
+        android:layout_toRightOf="@+id/btnBack"
+        android:layout_toEndOf="@+id/btnBack"/>
 
     <Button
         android:id="@+id/btnBack"
@@ -166,55 +129,55 @@
 
         android:onClick="ButtonsOnClick"
         android:text="@string/btnBack"
-        android:layout_alignTop="@+id/btnNew"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_below="@+id/btn3"
+        android:layout_alignLeft="@+id/btn3"
+        android:layout_alignStart="@+id/btn3"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:id="@+id/right_ans_count"
+        android:layout_alignParentTop="true"
         android:gravity="center"
-        android:textColor="#27e900"
-        android:textSize="20sp"
-        android:layout_below="@+id/textView3"
-        android:layout_above="@+id/txtQInfo"
-        android:background="#99ffffff"
-        android:layout_toLeftOf="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:id="@+id/wrong_ans_count"
-        android:textSize="20sp"
-        android:textColor="#e10000"
-        android:gravity="center"
-        android:layout_above="@+id/txtQInfo"
-        android:layout_below="@+id/textView5"
-        android:background="#99ffffff"
-        android:layout_toRightOf="@+id/textView4"
+        android:id="@+id/linearLayout"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:id="@+id/result_count"
-        android:layout_alignRight="@+id/textView4"
-        android:layout_alignEnd="@+id/textView4"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_above="@+id/txtQInfo"
-        android:layout_below="@+id/textView4"
-        android:background="#99ffffff"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/wrong_ans_count"
+            android:textSize="20sp"
+            android:textColor="#e10000"
+            android:gravity="center"
+            android:background="#b4ffffff"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/result_count"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="#b4ffffff"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/right_ans_count"
+            android:gravity="center"
+            android:textColor="#25e400"
+            android:textSize="20sp"
+            android:background="#b4ffffff"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 </RelativeLayout>
 

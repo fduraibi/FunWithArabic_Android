@@ -193,13 +193,9 @@ public class GameActivity extends Activity {
                 mySoundPool.play(sound_wrong, 1, 1, 1, 0, 1);
             }
 
-            if (score_num == 0) {
-                //show lose dialog
-                showFinalResult();
-            }
-            else {
+
                 score.setText(String.valueOf(score_num - 1));
-            }
+
 
         }
 
@@ -283,28 +279,4 @@ public class GameActivity extends Activity {
                 .show();
     }
 
-    public void showFinalResult(){
-        new AlertDialog.Builder(this)
-                .setTitle("انتهت اللعبة .")
-                .setMessage("إجابتك خاطئة ، الإجابة الصحيحة هي :"+
-                        btnA[correctA].getText().toString()
-                        + "\n عدد الإجابات الصحيحة :" + R_Answers_num
-                        +"\n عدد الإجابات الخاطئة : " + String.valueOf(W_Answers_num + 1))
-                .setPositiveButton("إعادة المحاولة", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = getIntent();
-                        finish();
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("خروج", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .setCancelable(false)
-                .show();
-    }
 }
