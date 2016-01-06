@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2015. Fahad Alduraibi
+  ~ Copyright (c) 2015. Fahad Alduraibi.
   ~ http://www.fadvisor.net
   -->
 
@@ -11,37 +11,8 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context="net.fadvisor.funwitharabic.GameActivity"
-    android:background="@color/white">
+    android:background="@drawable/bg">
 
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="الإجابات الصحيحة"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="النتيجة"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="الإجابات الخاطئة"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/txtQInfo"
@@ -52,8 +23,10 @@
         android:text="@string/titleInstruction"
         android:textColor="#ff000000"
         android:textSize="20sp"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true" />
+        android:background="#b4ffffff"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/txtQ"
@@ -66,9 +39,10 @@
         android:textColor="#ffFF0000"
         android:textIsSelectable="false"
         android:textSize="40sp"
-        android:layout_below="@+id/txtQInfo"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/q_background" />
+        android:background="@drawable/q_background"
+        android:layout_alignTop="@+id/txtQT"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <TextView
         android:id="@+id/txtQT"
@@ -81,9 +55,10 @@
         android:textColor="#ff000000"
         android:textIsSelectable="false"
         android:textSize="40sp"
+        android:background="@drawable/qt_background"
         android:layout_below="@+id/txtQInfo"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/qt_background" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/btn0"
@@ -92,10 +67,9 @@
         android:layout_height="wrap_content"
         android:onClick="ButtonsOnClick"
         android:text="New Button 0"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/btn1"
@@ -104,10 +78,9 @@
         android:layout_height="wrap_content"
         android:onClick="ButtonsOnClick"
         android:text="New Button 1"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_below="@+id/btn0"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/btn2"
@@ -116,23 +89,21 @@
         android:layout_height="wrap_content"
         android:onClick="ButtonsOnClick"
         android:text="New Button 2"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_below="@+id/btn1"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:id="@+id/btn3"
         style="@style/button_selection"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:onClick="ButtonsOnClick"
         android:text="New Button 3"
-        android:layout_below="@+id/btn2"
 
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/btn2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:id="@+id/btnNew"
@@ -142,9 +113,13 @@
 
         android:onClick="ButtonsOnClick"
         android:text="@string/btnNew"
-        android:layout_alignTop="@+id/btnBack"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginRight="38dp"
+        android:layout_marginEnd="38dp"
+        android:layout_below="@+id/btn3"
+        android:layout_alignRight="@+id/btn3"
+        android:layout_alignEnd="@+id/btn3"
+        android:layout_toRightOf="@+id/btnBack"
+        android:layout_toEndOf="@+id/btnBack"/>
 
     <Button
         android:id="@+id/btnBack"
@@ -154,9 +129,55 @@
 
         android:onClick="ButtonsOnClick"
         android:text="@string/btnBack"
-        android:layout_marginBottom="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_below="@+id/btn3"
+        android:layout_alignLeft="@+id/btn3"
+        android:layout_alignStart="@+id/btn3"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/wrong_ans_count"
+            android:textSize="20sp"
+            android:textColor="#e10000"
+            android:gravity="center"
+            android:background="#b4ffffff"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/result_count"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="#b4ffffff"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/right_ans_count"
+            android:gravity="center"
+            android:textColor="#25e400"
+            android:textSize="20sp"
+            android:background="#b4ffffff"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
 </RelativeLayout>
 
