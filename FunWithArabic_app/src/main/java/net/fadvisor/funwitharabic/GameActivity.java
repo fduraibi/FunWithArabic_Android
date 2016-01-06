@@ -265,7 +265,7 @@ public class GameActivity extends Activity {
 
         // Warn the player that exiting will cancel the score!! or maybe save the score and allow resuming
 
-        // Add all strings to language strings to allow translations
+        // Add all strings to language strings to allow translations .
         new AlertDialog.Builder(this)
                 .setMessage("هل أنت متأكد؟")
                 .setCancelable(false)
