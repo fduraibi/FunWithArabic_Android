@@ -10,6 +10,7 @@ package net.fadvisor.funwitharabic;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.StateListDrawable;
 import android.media.AudioAttributes;
@@ -20,6 +21,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +48,16 @@ public class GameActivity extends Activity {
     private boolean soundLoaded_wrong = false;
     private int sound_select;
     private boolean soundLoaded_select = false;
+
+
+    private TextView R_Answers; // The right answers counter in the top of the layout
+    private TextView W_Answers;// The wrong answers counter in the top of the layout
+    private TextView score;
+
+    private int R_Answers_num;
+    private int W_Answers_num;
+    private int score_num;
+
 
     {
         if (Build.VERSION.SDK_INT < 21) {
@@ -84,11 +97,18 @@ public class GameActivity extends Activity {
 
         txtQ = (TextView) findViewById(R.id.txtQ);
         txtQT = (TextView) findViewById(R.id.txtQT);
+
+        R_Answers = (TextView)findViewById(R.id.right_ans_count);
+        W_Answers = (TextView)findViewById(R.id.wrong_ans_count);
+        score = (TextView)findViewById(R.id.result_count);
+
         btnA[0] = (Button) findViewById(R.id.btn0);
         btnA[1] = (Button) findViewById(R.id.btn1);
         btnA[2] = (Button) findViewById(R.id.btn2);
         btnA[3] = (Button) findViewById(R.id.btn3);
         btnNext = (Button) findViewById(R.id.btnNew);
+
+
 
         // Used for randomizing the answers (these are the button numbers)
         rndList = new ArrayList<>();
@@ -144,6 +164,11 @@ public class GameActivity extends Activity {
         }
 
         if (Answer >= 0) {
+
+            R_Answers_num = Integer.parseInt(R_Answers.getText().toString());
+            W_Answers_num = Integer.parseInt(W_Answers.getText().toString());
+            score_num = Integer.parseInt(score.getText().toString());
+
             checkAnswer(Answer);
         }
     }
@@ -151,18 +176,39 @@ public class GameActivity extends Activity {
     private void checkAnswer(int Answer) {
         if (Answer == correctA) {
             btnA[Answer].setBackgroundResource(R.drawable.btn1_green_pressed);
+
+            R_Answers.setText(String.valueOf(R_Answers_num + 1));
+            score.setText(String.valueOf(score_num + 1));
+
             if (soundLoaded_correct) {
                 mySoundPool.play(sound_correct, 1, 1, 1, 0, 1);
             }
         } else {
             btnA[Answer].setBackgroundResource(R.drawable.btn1_red_pressed);
             btnA[correctA].setBackgroundResource(R.drawable.btn1_green_normal);
+
+            W_Answers.setText(String.valueOf(W_Answers_num + 1));
+
             if (soundLoaded_wrong) {
                 mySoundPool.play(sound_wrong, 1, 1, 1, 0, 1);
             }
+
+
+                score.setText(String.valueOf(score_num - 1));
+
+
         }
 
         // TODO: set score
+        // TODO: add score to the database to show the best score
+
+        /*
+        * Add DB table named (results) with 4 columns(
+        * player name , number of correct answers ,
+        * number of wrong answers , final result
+        * )
+        */
+
 
         for (int i = 0; i < 4 ; i++){
             btnA[i].setClickable(false);
@@ -219,9 +265,9 @@ public class GameActivity extends Activity {
 
         // Warn the player that exiting will cancel the score!! or maybe save the score and allow resuming
 
-        // Add all strings to language strings to allow translations
+        // Add all strings to language strings to allow translations .
         new AlertDialog.Builder(this)
-                .setMessage("هل انت متاكد؟")
+                .setMessage("هل أنت متأكد؟")
                 .setCancelable(false)
                 .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -232,5 +278,5 @@ public class GameActivity extends Activity {
                 .setNegativeButton("لا", null)
                 .show();
     }
-}
 
+}

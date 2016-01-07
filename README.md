@@ -1,4 +1,7 @@
 # Fun With Arabic تمتع مع العربية
+[![Build Status](https://travis-ci.org/fduraibi/FunWithArabic_Android.svg?branch=master)](https://travis-ci.org/fduraibi/FunWithArabic_Android)
+[![GPL License](https://img.shields.io/badge/license-GPL-blue.svg?style=flat)](https://github.com/fduraibi/FunWithArabic_Android/blob/master/LICENSE)
+
 Quiz style Android game to teach Arabic, intended for kids
 still in Alpha stage and needs more work.
 
