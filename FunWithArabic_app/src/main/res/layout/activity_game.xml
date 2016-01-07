@@ -42,7 +42,8 @@
         android:background="@drawable/q_background"
         android:layout_alignTop="@+id/txtQT"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/btn0"/>
 
     <TextView
         android:id="@+id/txtQT"
@@ -56,9 +57,10 @@
         android:textIsSelectable="false"
         android:textSize="40sp"
         android:background="@drawable/qt_background"
-        android:layout_below="@+id/txtQInfo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_above="@+id/btn0"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/progress"/>
 
     <Button
         android:id="@+id/btn0"
@@ -171,13 +173,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:id="@+id/right_ans_count"
+            android:id="@+id/correct_ans_count"
             android:gravity="center"
             android:textColor="#25e400"
             android:textSize="20sp"
             android:background="#b4ffffff"
             android:layout_weight="1"/>
     </LinearLayout>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress"
+        android:max="10"
+        android:indeterminate="false"
+        android:progress="0"
+        android:progressDrawable="@drawable/progressbar"
+        android:layout_below="@+id/txtQInfo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>
 

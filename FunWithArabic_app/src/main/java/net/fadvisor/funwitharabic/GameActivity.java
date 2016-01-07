@@ -20,10 +20,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,13 +48,16 @@ public class GameActivity extends Activity {
     private boolean soundLoaded_select = false;
 
 
-    private TextView R_Answers; // The right answers counter in the top of the layout
+    private TextView C_Answers; // The right answers counter in the top of the layout
     private TextView W_Answers;// The wrong answers counter in the top of the layout
     private TextView score;
 
-    private int R_Answers_num;
+    private int C_Answers_num;
     private int W_Answers_num;
     private int score_num;
+
+    private ProgressBar progress; // The progress of the player (Max = NumberOfQ)
+    private int NumberOfQ; // Number of questions (It will be changeable before game starts)
 
 
     {
@@ -98,7 +99,7 @@ public class GameActivity extends Activity {
         txtQ = (TextView) findViewById(R.id.txtQ);
         txtQT = (TextView) findViewById(R.id.txtQT);
 
-        R_Answers = (TextView)findViewById(R.id.right_ans_count);
+        C_Answers = (TextView)findViewById(R.id.correct_ans_count);
         W_Answers = (TextView)findViewById(R.id.wrong_ans_count);
         score = (TextView)findViewById(R.id.result_count);
 
@@ -107,6 +108,13 @@ public class GameActivity extends Activity {
         btnA[2] = (Button) findViewById(R.id.btn2);
         btnA[3] = (Button) findViewById(R.id.btn3);
         btnNext = (Button) findViewById(R.id.btnNew);
+
+        // TODO: Make the NumberOfQ changeable before game start .
+
+        NumberOfQ = 10;
+        progress = (ProgressBar)findViewById(R.id.progress);
+        progress.setMax(NumberOfQ);
+
 
 
 
@@ -143,7 +151,13 @@ public class GameActivity extends Activity {
                 if (soundLoaded_select) {
                     mySoundPool.play(sound_select, 1, 1, 1, 0, 1);
                 }
-                fetchNewQ();
+                progress.setProgress(progress.getProgress() + 1);
+                
+                if (progress.getProgress() == progress.getMax()){
+                    FinishTheGame(C_Answers_num,W_Answers_num,score_num);
+                } else{
+                    fetchNewQ();
+                }
                 break;
 
             case R.id.btn0:
@@ -165,7 +179,7 @@ public class GameActivity extends Activity {
 
         if (Answer >= 0) {
 
-            R_Answers_num = Integer.parseInt(R_Answers.getText().toString());
+            C_Answers_num = Integer.parseInt(C_Answers.getText().toString());
             W_Answers_num = Integer.parseInt(W_Answers.getText().toString());
             score_num = Integer.parseInt(score.getText().toString());
 
@@ -177,7 +191,7 @@ public class GameActivity extends Activity {
         if (Answer == correctA) {
             btnA[Answer].setBackgroundResource(R.drawable.btn1_green_pressed);
 
-            R_Answers.setText(String.valueOf(R_Answers_num + 1));
+            C_Answers.setText(String.valueOf(C_Answers_num + 1));
             score.setText(String.valueOf(score_num + 1));
 
             if (soundLoaded_correct) {
@@ -194,12 +208,14 @@ public class GameActivity extends Activity {
             }
 
 
-                score.setText(String.valueOf(score_num - 1));
-
-
+            score.setText(String.valueOf(score_num - 1));
         }
 
-        // TODO: set score
+
+        C_Answers_num = Integer.parseInt(C_Answers.getText().toString());
+        W_Answers_num = Integer.parseInt(W_Answers.getText().toString());
+        score_num = Integer.parseInt(score.getText().toString());
+        
         // TODO: add score to the database to show the best score
 
         /*
@@ -276,6 +292,31 @@ public class GameActivity extends Activity {
                     }
                 })
                 .setNegativeButton("لا", null)
+                .show();
+    }
+
+    public void FinishTheGame(int Correct,int Wrong ,int result){
+        new AlertDialog.Builder(this)
+                .setTitle("انتهت اللعبة")
+                .setMessage("لقد أنهيت العدد المحدد من الأسئلة،"
+                        + "\n" + "الإجابة الصحيحة للسؤال الأخير :" + btnA[correctA].getText()
+                        + "\n" + "عدد الإجابات الصحيحة :"+ Correct
+                        + "\n" + "عدد الإجابات الخاطئة :"+ Wrong
+                        + "\n" + "النتيجة النهائية :"+ result)
+                .setPositiveButton("إلعب مرة أخرى", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("اخرج", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
                 .show();
     }
 
