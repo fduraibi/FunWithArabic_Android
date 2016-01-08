@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class GameActivity extends Activity {
     private TextView txtQ;
     private TextView txtQT;
     private Button btnA[] = new Button[4];
-    private Button btnNext;
+    private ImageButton btnResult;
     private int correctA;
     private List<Integer> rndList;   // Random list for the answers
     private Random rndValue;    // Random value for the DB record query
@@ -107,16 +108,13 @@ public class GameActivity extends Activity {
         btnA[1] = (Button) findViewById(R.id.btn1);
         btnA[2] = (Button) findViewById(R.id.btn2);
         btnA[3] = (Button) findViewById(R.id.btn3);
-        btnNext = (Button) findViewById(R.id.btnNew);
+        btnResult = (ImageButton) findViewById(R.id.btnResult);
 
         // TODO: Make the NumberOfQ changeable before game start .
 
-        NumberOfQ = 10;
+        NumberOfQ = 5;
         progress = (ProgressBar)findViewById(R.id.progress);
         progress.setMax(NumberOfQ);
-
-
-
 
         // Used for randomizing the answers (these are the button numbers)
         rndList = new ArrayList<>();
@@ -147,12 +145,11 @@ public class GameActivity extends Activity {
             case R.id.btnBack:
                 onBackPressed();
                 break;
-            case R.id.btnNew:
+            case R.id.btnResult:
                 if (soundLoaded_select) {
                     mySoundPool.play(sound_select, 1, 1, 1, 0, 1);
                 }
-                progress.setProgress(progress.getProgress() + 1);
-                
+
                 if (progress.getProgress() == progress.getMax()){
                     FinishTheGame(C_Answers_num,W_Answers_num,score_num);
                 } else{
@@ -194,6 +191,8 @@ public class GameActivity extends Activity {
             C_Answers.setText(String.valueOf(C_Answers_num + 1));
             score.setText(String.valueOf(score_num + 1));
 
+            btnResult.setImageResource(R.drawable.correct_answer);
+
             if (soundLoaded_correct) {
                 mySoundPool.play(sound_correct, 1, 1, 1, 0, 1);
             }
@@ -202,13 +201,13 @@ public class GameActivity extends Activity {
             btnA[correctA].setBackgroundResource(R.drawable.btn1_green_normal);
 
             W_Answers.setText(String.valueOf(W_Answers_num + 1));
+            score.setText(String.valueOf(score_num - 1));
+
+            btnResult.setImageResource(R.drawable.wrong_answer);
 
             if (soundLoaded_wrong) {
                 mySoundPool.play(sound_wrong, 1, 1, 1, 0, 1);
             }
-
-
-            score.setText(String.valueOf(score_num - 1));
         }
 
 
@@ -226,17 +225,14 @@ public class GameActivity extends Activity {
         */
 
 
-        for (int i = 0; i < 4 ; i++){
-            btnA[i].setClickable(false);
-        }
-        btnNext.setVisibility(View.VISIBLE);
+        btnResult.setVisibility(View.VISIBLE);
         //TODO: maybe load next Q? after some wait?
     }
     private void fetchNewQ() {
         for (int i = 0; i < 4; i++) {
             StateListDrawable state_up = new StateListDrawable();
             state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal));
-            state_up.addState(new int[] {android.R.attr.state_pressed},getResources().getDrawable(R.drawable.btn1_blue_pressed));
+            state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed));
 
             if(Build.VERSION.SDK_INT < 16) {
                 //noinspection deprecation
@@ -244,10 +240,9 @@ public class GameActivity extends Activity {
             } else {
                 btnA[i].setBackground(state_up);
             }
-
-            btnA[i].setClickable(true);
-            btnNext.setVisibility(View.INVISIBLE);
         }
+
+        btnResult.setVisibility(View.INVISIBLE);
 
         Cursor mCursor = myDB.getData(String.valueOf(rndValue.nextInt(DB_TOTAL) + 1));
         if (mCursor.getCount() > 0) {
@@ -264,6 +259,8 @@ public class GameActivity extends Activity {
             btnA[(rndList.get(3))].setText(mCursor.getString(5));
         }
         mCursor.close();
+
+        progress.setProgress(progress.getProgress() + 1);
     }
 
     private String QParser(String strQ) {
@@ -296,13 +293,14 @@ public class GameActivity extends Activity {
     }
 
     public void FinishTheGame(int Correct,int Wrong ,int result){
+
+        // نحتاج عرض النتيجة بشكل اجمل
         new AlertDialog.Builder(this)
                 .setTitle("انتهت اللعبة")
                 .setMessage("لقد أنهيت العدد المحدد من الأسئلة،"
-                        + "\n" + "الإجابة الصحيحة للسؤال الأخير :" + btnA[correctA].getText()
-                        + "\n" + "عدد الإجابات الصحيحة :"+ Correct
-                        + "\n" + "عدد الإجابات الخاطئة :"+ Wrong
-                        + "\n" + "النتيجة النهائية :"+ result)
+                        + "\n" + "عدد الإجابات الصحيحة : "+ Correct
+                        + "\n" + "عدد الإجابات الخاطئة : "+ Wrong
+                        + "\n" + "النتيجة النهائية : "+ result)
                 .setPositiveButton("إلعب مرة أخرى", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

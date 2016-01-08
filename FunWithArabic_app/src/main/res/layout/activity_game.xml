@@ -13,6 +13,21 @@
     tools:context="net.fadvisor.funwitharabic.GameActivity"
     android:background="@drawable/bg">
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress"
+        android:max="10"
+        android:indeterminate="false"
+        android:progress="0"
+        android:progressDrawable="@drawable/progressbar"
+        android:layout_alignTop="@+id/txtQInfo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/txtQInfo" />
 
     <TextView
         android:id="@+id/txtQInfo"
@@ -23,7 +38,7 @@
         android:text="@string/titleInstruction"
         android:textColor="#ff000000"
         android:textSize="20sp"
-        android:background="#b4ffffff"
+        android:background="#7affffff"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
@@ -60,7 +75,7 @@
         android:layout_above="@+id/btn0"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/progress"/>
+        android:layout_below="@+id/txtQInfo"/>
 
     <Button
         android:id="@+id/btn0"
@@ -105,23 +120,7 @@
 
         android:layout_below="@+id/btn2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <Button
-        android:id="@+id/btnNew"
-        style="@style/style_btn_blue1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:onClick="ButtonsOnClick"
-        android:text="@string/btnNew"
-        android:layout_marginRight="38dp"
-        android:layout_marginEnd="38dp"
-        android:layout_below="@+id/btn3"
-        android:layout_alignRight="@+id/btn3"
-        android:layout_alignEnd="@+id/btn3"
-        android:layout_toRightOf="@+id/btnBack"
-        android:layout_toEndOf="@+id/btnBack"/>
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnBack"
@@ -155,7 +154,7 @@
             android:textSize="20sp"
             android:textColor="#e10000"
             android:gravity="center"
-            android:background="#b4ffffff"
+            android:background="#7affffff"
             android:layout_weight="1"/>
 
         <TextView
@@ -166,7 +165,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="@color/black"
-            android:background="#b4ffffff"
+            android:background="#7affffff"
             android:layout_weight="1"/>
 
         <TextView
@@ -177,24 +176,25 @@
             android:gravity="center"
             android:textColor="#25e400"
             android:textSize="20sp"
-            android:background="#b4ffffff"
+            android:background="#7affffff"
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progress"
-        android:max="10"
-        android:indeterminate="false"
-        android:progress="0"
-        android:progressDrawable="@drawable/progressbar"
-        android:layout_below="@+id/txtQInfo"
+        android:id="@+id/btnResult"
+        android:onClick="ButtonsOnClick"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:visibility="visible"
+        android:background="#60ffffff"
+        android:layout_alignTop="@+id/txtQ"
+        android:src="@drawable/correct_answer"
+        android:paddingBottom="300dp" />
 
 </RelativeLayout>
 
