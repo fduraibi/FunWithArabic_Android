@@ -7,17 +7,21 @@
 
 package net.fadvisor.funwitharabic;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ArrayAdapter;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -130,5 +134,40 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         int count= mCursor.getInt(0);
         mCursor.close();
         return count;
+    }
+
+
+    /**
+     * @param name The player name
+     * @param CA The number of correct answers
+     * @param WA The number of wrong answers
+     * @param finalR The final result
+     */
+    public void addResult(String name,int CA,int WA,int finalR){
+        ContentValues container = new ContentValues();
+        container.put("name",name);
+        container.put("CA",CA);
+        container.put("WA",WA);
+        container.put("finalR",finalR);
+
+        myDataBase.insert("results",null,container);
+
+       // myDataBase.execSQL("INSERT INTO results ('name','CA','WA','finalR')" +
+       //         " VALUES ('"+ name +"','" +CA +"','"+WA+"','"+finalR+"');");
+    }
+
+
+    public ArrayList getplayersnames(){
+        Cursor cursor = myDataBase.rawQuery("SELECT name FROM results ORDER BY finalR DESC", null);
+        ArrayList<String> list = new ArrayList<>();
+        int index = cursor.getColumnIndex("name");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(index));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
     }
 }
