@@ -8,6 +8,7 @@
     <string name="btnBack"><![CDATA[<-]]></string>
     <string name="start">إبدا</string>
     <string name="exit">اخرج</string>
+    <string name="resultsbtn">عرض النتائج</string>
     <string name="aboutus">عن البرنامج</string>
     <string name="titleInstruction">
         قم باختيار الإجابة الصحيحة مكان الفراغ
