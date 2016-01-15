@@ -115,5 +115,16 @@
             android:visibility="invisible" />
     </FrameLayout>
 
+    <SurfaceView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/surfaceViewAnimGuy"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnAboutUs"
+        android:layout_alignRight="@+id/btnExit"
+        android:layout_alignEnd="@+id/btnExit" />
+
 
 </LinearLayout>
