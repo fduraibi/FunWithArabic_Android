@@ -10,8 +10,11 @@ package net.fadvisor.funwitharabic;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -21,12 +24,16 @@ public class MainActivity extends Activity {
 
     SurfaceView surfaceView;
     AnimGuy animGuy;
+    Bitmap guyimg;
+    int imgHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        guyimg = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+        imgHeight = guyimg.getHeight();
         surfaceView = (SurfaceView) findViewById(R.id.surfaceViewAnimGuy);
         animGuy = new AnimGuy(this);
 
@@ -86,6 +93,8 @@ public class MainActivity extends Activity {
         Thread thread = null;
         SurfaceHolder surfaceHolder;
         boolean animate = false;
+        int x;
+        int frame = 0;
 
         public AnimGuy(Context context) {
             super(context);
@@ -98,15 +107,30 @@ public class MainActivity extends Activity {
         @Override
         public void run() {
             while (animate) {
-                if (!surfaceHolder.getSurface().isValid()) {
-                    continue;
+                if (surfaceHolder.getSurface().isValid()) {
+                    Canvas canvas = surfaceHolder.lockCanvas();
+
+                    canvas.drawARGB(255, 0, 0, 255);
+
+                    x = frame * imgHeight;
+                    Rect src = new Rect(x, 0, x + imgHeight, imgHeight);
+                    Rect dst = new Rect(0, 0, imgHeight, imgHeight);
+                    canvas.drawBitmap(guyimg, src, dst, null);
+
+                    frame = ++frame % 10;
+
+
+                    surfaceHolder.unlockCanvasAndPost(canvas);
+
+
+
                 }
 
-                Canvas canvas = surfaceHolder.lockCanvas();
-                canvas.drawARGB(5, 0,0,255 );
-                surfaceHolder.unlockCanvasAndPost(canvas);
-
-
+                try {
+                    Thread.sleep(80);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
