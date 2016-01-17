@@ -90,6 +90,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
         }
         // THIS else IS FOR DEVELOPMENT ONLY TO RENEW THE DB file EVERY TIME, SHOULD BE REMOVED LATER
+       /*
         else{
 
             myContext.deleteFile(DB_NAME); // delete the existing DB and create a new one
@@ -98,7 +99,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         myDataBase = SQLiteDatabase.openDatabase(myDBfile.getAbsolutePath(), null, SQLiteDatabase.OPEN_READWRITE);
     }
@@ -145,12 +146,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      */
     public void addResult(String name,int CA,int WA,int finalR){
         ContentValues container = new ContentValues();
-        container.put("name",name);
+        container.put("name", name);
         container.put("CA",CA);
         container.put("WA",WA);
         container.put("finalR",finalR);
 
-        myDataBase.insert("results",null,container);
+        myDataBase.insert("results", null, container);
 
        // myDataBase.execSQL("INSERT INTO results ('name','CA','WA','finalR')" +
        //         " VALUES ('"+ name +"','" +CA +"','"+WA+"','"+finalR+"');");
@@ -169,5 +170,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return list;
+    }
+
+    public int[] getDataByName(String name){
+        Cursor cursor = myDataBase.rawQuery("SELECT CA,WA,finalR FROM results",null);
+
+        int CAindex = cursor.getColumnIndex("CA");
+        int WAindex = cursor.getColumnIndex("WA");
+        int FRindex = cursor.getColumnIndex("finalR");
+
+        // results array will contains the following data :
+        // (0-> correct answers | 1-> wrong answers | 2 -> final result)
+        int results[] = new int[3];
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            results[0] = cursor.getInt(CAindex);
+            results[1] = cursor.getInt(WAindex);
+            results[2] = cursor.getInt(FRindex);
+            cursor.moveToNext();
+        }
+
+        return results;
     }
 }
