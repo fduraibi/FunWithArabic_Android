@@ -29,8 +29,13 @@ public class results extends Activity {
 
 
         items = myDB.getplayersnames();
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items));
-
+        if(items.isEmpty()){
+            listView.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, "لا توجد نتائج مسجلة", Toast.LENGTH_LONG).show();
+        }
+        else {
+            listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items));
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -39,6 +44,9 @@ public class results extends Activity {
                 showSelectedResult(playername,results[0],results[1],results[2]);
             }
         });
+    }
+    public void onClick(View v){
+        finish();
     }
     private void showSelectedResult(String name,int CA,int WA,int finalR){
         new AlertDialog.Builder(this)
