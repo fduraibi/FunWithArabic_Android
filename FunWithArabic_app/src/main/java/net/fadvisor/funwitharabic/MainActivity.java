@@ -13,9 +13,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -34,6 +37,7 @@ public class MainActivity extends Activity {
 
         guyimg = BitmapFactory.decodeResource(getResources(), R.drawable.test);
         imgHeight = guyimg.getHeight();
+        Log.d("image size ---------", String.valueOf(imgHeight));
         surfaceView = (SurfaceView) findViewById(R.id.surfaceViewAnimGuy);
         animGuy = new AnimGuy(this);
 
@@ -103,19 +107,19 @@ public class MainActivity extends Activity {
             while (animate) {
                 if (surfaceHolder.getSurface().isValid()) {
                     Canvas canvas = surfaceHolder.lockCanvas();
+                    int canvasHeight = canvas.getHeight();
 
-                    canvas.drawARGB(255, 0, 0, 255);
+                    // Clear any existing drawing
+                    canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 
                     x = frame * imgHeight;
                     Rect src = new Rect(x, 0, x + imgHeight, imgHeight);
-                    Rect dst = new Rect(0, 0, imgHeight, imgHeight);
+                    Rect dst = new Rect(0, 0, canvasHeight, canvasHeight);
                     canvas.drawBitmap(guyimg, src, dst, null);
 
-                    frame = ++frame % 10;
-
+                    frame = ++frame % 10; // 10 is the number of frames in the sprite image
 
                     surfaceHolder.unlockCanvasAndPost(canvas);
-
 
 
                 }
