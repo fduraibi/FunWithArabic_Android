@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -292,15 +293,15 @@ public class GameActivity extends Activity {
                 .show();
     }
 
-    public void FinishTheGame(int Correct,int Wrong ,int result){
+    public void FinishTheGame(final int Correct, final int Wrong , final int result){
 
         // نحتاج عرض النتيجة بشكل اجمل
         new AlertDialog.Builder(this)
                 .setTitle("انتهت اللعبة")
                 .setMessage("لقد أنهيت العدد المحدد من الأسئلة،"
-                        + "\n" + "عدد الإجابات الصحيحة : "+ Correct
-                        + "\n" + "عدد الإجابات الخاطئة : "+ Wrong
-                        + "\n" + "النتيجة النهائية : "+ result)
+                        + "\n" + "عدد الإجابات الصحيحة : " + Correct
+                        + "\n" + "عدد الإجابات الخاطئة : " + Wrong
+                        + "\n" + "النتيجة النهائية : " + result)
                 .setPositiveButton("إلعب مرة أخرى", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -309,9 +310,34 @@ public class GameActivity extends Activity {
                         startActivity(intent);
                     }
                 })
+                .setNeutralButton("احفظ النتيجة", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        saveResult(Correct,Wrong,result);
+                    }
+                })
                 .setNegativeButton("اخرج", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .show();
+    }
+
+    // Add the player name and results to the database
+    public void saveResult(final int Correct, final int Wrong , final int result){
+        final EditText name = new EditText(this);
+        name.setHint("أكتب إسمك هنا");
+        new AlertDialog.Builder(this)
+                .setTitle("تسجيل نتيجة جديدة")
+                .setView(name)
+                .setCancelable(false)
+                .setNegativeButton("إلغاء",null)
+                .setPositiveButton("حفظ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        myDB.addResult(name.getText().toString(),Correct,Wrong,result);
                         finish();
                     }
                 })

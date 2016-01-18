@@ -12,41 +12,47 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+                android:gravity="center">
 
-    <Button
-        android:id="@+id/btnStart"
-        android:onClick="ButtonsOnClick"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnExit"
-        android:text="@string/start"
-        style="@style/style_btn_blue1"
-        android:layout_alignLeft="@+id/btnAboutUs"
-        android:layout_alignStart="@+id/btnAboutUs"
-        android:layout_alignRight="@+id/btnAboutUs"
-        android:layout_alignEnd="@+id/btnAboutUs"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnExit"
-        android:onClick="ButtonsOnClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        style="@style/style_btn_blue1"
-        android:text="@string/exit"
-        android:layout_alignLeft="@+id/btnAboutUs"
-        android:layout_alignStart="@+id/btnAboutUs"
-        android:layout_alignRight="@+id/btnAboutUs"
-        android:layout_alignEnd="@+id/btnAboutUs"/>
+        <Button
+            android:id="@+id/btnStart"
+            android:onClick="ButtonsOnClick"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            style="@style/style_btn_blue1"/>
 
-    <Button
-        android:id="@+id/btnAboutUs"
-        android:onClick="ButtonsOnClick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/aboutus"
-        style="@style/style_btn_blue1"
-        android:layout_below="@+id/btnExit"
-        android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/resultsbtn"
+            android:id="@+id/resultsbtn"
+            style="@style/style_btn_blue1"
+            android:onClick="ButtonsOnClick"/>
+
+        <Button
+            android:id="@+id/btnAboutUs"
+            android:onClick="ButtonsOnClick"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/aboutus"
+            style="@style/style_btn_blue1"/>
+
+        <Button
+            android:id="@+id/btnExit"
+            android:onClick="ButtonsOnClick"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            style="@style/style_btn_blue1"
+            android:text="@string/exit"/>
+
+    </LinearLayout>
+
 </RelativeLayout>

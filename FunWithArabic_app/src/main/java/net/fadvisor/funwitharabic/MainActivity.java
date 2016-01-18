@@ -36,7 +36,9 @@ public class MainActivity extends Activity {
             case R.id.btnAboutUs:
                 //TODO: Show about us
                 break;
-
+            case R.id.resultsbtn:
+                startActivity(new Intent(this,results.class));
+                break;
             case R.id.btnExit:
                 finish();
                 break;

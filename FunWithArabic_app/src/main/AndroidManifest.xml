@@ -23,6 +23,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.fadvisor.funwitharabic.MainActivity" />
         </activity>
+        <activity android:name=".results" >
+        </activity>
     </application>
 
 </manifest>
