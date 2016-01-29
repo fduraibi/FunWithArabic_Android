@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.graphics.drawable.StateListDrawable;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -68,7 +69,7 @@ public class GameActivity extends Activity {
             mySoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
         } else {
             AudioAttributes attr = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_GAME)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .build();
 
@@ -110,6 +111,14 @@ public class GameActivity extends Activity {
         btnA[2] = (Button) findViewById(R.id.btn2);
         btnA[3] = (Button) findViewById(R.id.btn3);
         btnResult = (ImageButton) findViewById(R.id.btnResult);
+
+        // Set the font of these elements to Noto Naskh
+        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/NotoNaskhArabicUI-Regular.ttf");
+        txtQ.setTypeface(type);
+        txtQT.setTypeface(type);
+        for (int i = 0; i < 4; i++) {
+            btnA[i].setTypeface(type);
+        }
 
         // TODO: Make the NumberOfQ changeable before game start .
 
