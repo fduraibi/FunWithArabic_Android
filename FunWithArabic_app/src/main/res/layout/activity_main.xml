@@ -60,4 +60,17 @@
         android:layout_below="@+id/btnAboutUs"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/btnTest"
+        android:onClick="ButtonsOnClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/style_btn_blue1"
+        android:text="اختبار زر تحت الرسم المتحرك"
+        android:layout_marginBottom="45dp"
+        android:layout_alignBottom="@+id/surfaceViewAnimGuy"
+        android:layout_toLeftOf="@+id/btnAboutUs"
+        android:layout_toStartOf="@+id/btnAboutUs" />
+
 </RelativeLayout>
