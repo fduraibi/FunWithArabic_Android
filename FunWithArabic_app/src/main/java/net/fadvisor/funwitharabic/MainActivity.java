@@ -82,6 +82,11 @@ public class MainActivity extends Activity {
             case R.id.btnExit:
                 finish();
                 break;
+
+
+            case R.id.btnTest:
+                finish();
+                break;
         }
     }
 
