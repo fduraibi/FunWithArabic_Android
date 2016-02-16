@@ -9,4 +9,11 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+
+    <declare-styleable name="ShapedButton">
+        <attr name="color" format="color" />
+        <attr name="pressedShift" format="dimension" />
+        <attr name="normalBackground" format="integer" />
+        <attr name="pressedBackground" format="integer" />
+    </declare-styleable>
 </resources>
