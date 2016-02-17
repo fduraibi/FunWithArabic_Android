@@ -47,7 +47,8 @@ public class ShapedButton extends Button implements View.OnTouchListener {
     protected void onFinishInflate() {
         super.onFinishInflate();
         // Set the button background and color
-        refresh();
+        updateButton(normalButton);
+//        this.setPadding(0, 0, 0, 0);
     }
 
     private void setDefaults() {
@@ -94,8 +95,8 @@ public class ShapedButton extends Button implements View.OnTouchListener {
                 if (drawable != null) {
                     normalButton = drawable;
 
-                    // Try to find away to get this from the xml, so it can be changeable
-                    bitmap = BitmapFactory.decodeResource(getResources(), R.attr.normalBackground);
+                    // Try to find away to get this from the xml, so it will be based on whatever the user set
+                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.hex_button_white_normal);
 
                 }
             } else if (attr == R.styleable.ShapedButton_pressedBackground) {
@@ -125,33 +126,22 @@ public class ShapedButton extends Button implements View.OnTouchListener {
         float scaledX = x * bitmapW / realW;
         float scaledY = y * bitmapH / realH;
 
-//        String vname = "";
-//        if (view.getId() == R.id.btnStart) {
-//            vname = "start";
-//        } else if (view.getId() == R.id.btnAboutUs) {
-//            vname = "AboutUs";
-//        }
-
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (scaledX >= 0 & scaledY >= 0 & scaledX < bitmapW & scaledY < bitmapH) {
                     if (bitmap.getPixel((int) scaledX, (int) scaledY) != 0) {
                         updateButton(pressedButton);
                         this.setPadding(0, pressedShift, 0, 0);
-//                        Log.d(vname, "down & inside");
                         return false;
-                    } else {
-//                        Log.d(vname, "down & outside");
                     }
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                Rect r = new Rect();
-                view.getLocalVisibleRect(r);
-                if (!r.contains((int) x, (int) y)) {
+                Rect rect = new Rect();
+                view.getLocalVisibleRect(rect);
+                if (!rect.contains((int) x, (int) y)) {
                     updateButton(normalButton);
                     this.setPadding(0, 0, 0, 0);
-
                 }
                 break;
             case MotionEvent.ACTION_OUTSIDE:
@@ -159,46 +149,14 @@ public class ShapedButton extends Button implements View.OnTouchListener {
             case MotionEvent.ACTION_UP:
                 updateButton(normalButton);
                 this.setPadding(0, 0, 0, 0);
-
                 if (scaledX >= 0 & scaledY >= 0 & scaledX < bitmap.getWidth() & scaledY < bitmap.getHeight()) {
                     if (bitmap.getPixel((int) scaledX, (int) scaledY) != 0) {
-//                        Log.d(vname, "up & inside");
                         return false;
-                    } else {
-//                        Log.d(vname, "up & outside");
                     }
-                } else {
-//                    Log.d(vname, "up & far");
                 }
                 break;
         }
         return true;
-    }
-
-    public void refresh() {
-//        if (this.isEnabled()) {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                pressedButton = getResources().getDrawable(R.drawable.hex_button_white_pressed, null);
-//                normalButton = getResources().getDrawable(R.drawable.hex_button_white_normal, null);
-//            } else {
-//                //noinspection deprecation
-//                pressedButton = getResources().getDrawable(R.drawable.hex_button_white_pressed);
-//                //noinspection deprecation
-//                normalButton = getResources().getDrawable(R.drawable.hex_button_white_normal);
-//            }
-//        } else {
-//			// Disabled button
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                normalButton = getResources().getDrawable(R.drawable.hex_button_white_normal, null);
-//            } else {
-//                //noinspection deprecation
-//                normalButton = getResources().getDrawable(R.drawable.hex_button_white_normal);
-//            }
-//            // TODO: Set color to gray
-//        }
-
-        updateButton(normalButton);
-        this.setPadding(0, 0, 0, 0);
     }
 
     private void updateButton(Drawable background) {
@@ -211,14 +169,25 @@ public class ShapedButton extends Button implements View.OnTouchListener {
             this.setBackgroundDrawable(background);
         }
         this.getBackground().setColorFilter(buttonColor, PorterDuff.Mode.MULTIPLY);
-
-        Log.d("updateBtn-color", String.valueOf(buttonColor));
+//        this.setBackgroundColor(buttonColor);
     }
 
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        refresh();
+
+        if (this.isEnabled()) {
+            this.getBackground().setColorFilter(buttonColor, PorterDuff.Mode.MULTIPLY);
+        } else {
+            int disabledColor;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                disabledColor = getResources().getColor(R.color.gray_light, null);
+            } else {
+                //noinspection deprecation
+                disabledColor = getResources().getColor(R.color.gray_light);
+            }
+            this.getBackground().setColorFilter(disabledColor, PorterDuff.Mode.MULTIPLY);
+        }
     }
 
 

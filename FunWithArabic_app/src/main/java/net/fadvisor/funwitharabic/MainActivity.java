@@ -38,6 +38,12 @@ public class MainActivity extends Activity {
                 break;
             case R.id.resultsbtn:
 //                startActivity(new Intent(this,results.class));
+                ShapedButton btnStart = (ShapedButton) findViewById(R.id.btnStart);
+                if (btnStart.isEnabled()) {
+                    btnStart.setEnabled(false);
+                } else {
+                    btnStart.setEnabled(true);
+                }
                 break;
             case R.id.btnExit:
                 finish();
