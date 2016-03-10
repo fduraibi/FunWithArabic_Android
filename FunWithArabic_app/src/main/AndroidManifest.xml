@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -12,8 +13,17 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http"
+                    android:host="www.fadvisor.net"
+                    android:pathPrefix="/funwitharabic" />
+                <data android:scheme="fadvisor"
+                    android:host="funwitharabic" />
+
             </intent-filter>
         </activity>
         <activity
@@ -28,3 +38,14 @@
     </application>
 
 </manifest>
+
+<!-- THINGS TO CONSIDER LATER
+
+* For allowing backup we can specify an xml file to include/exclude files and settings
+android:fullBackupContent="@xml/mybackupscheme"
+read more here: http://developer.android.com/training/backup/autosyncapi.html
+=====
+
+The data host/pathPrefix/scheme are used to make the app searchable through google, so get a working URL
+
+-->
