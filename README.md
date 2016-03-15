@@ -2,9 +2,6 @@
 [![Build Status](https://travis-ci.org/fduraibi/FunWithArabic_Android.svg?branch=master)](https://travis-ci.org/fduraibi/FunWithArabic_Android)
 [![GPL License](https://img.shields.io/badge/license-GPL-blue.svg?style=flat)](https://github.com/fduraibi/FunWithArabic_Android/blob/master/LICENSE)
 
-Quiz style Android game to teach Arabic, intended for kids
-still in Alpha stage and needs more work.
-
 برنامج معد للاطفال بهدف تعليمهم اللغة العربية بطريقة المسابقات
 
 
@@ -18,3 +15,6 @@ still in Alpha stage and needs more work.
 - ربط النتائج مع خدمة العاب قووقل لعرض نتائج الجميع (اختياري للمستخدم)
 - اضافة خاصية التحدي عبر الانترنت (خاصية متقدمة)
 - امكانية اضافة جمل جديدة ورفعها للخادم (يتم التحقق منها قبل اعتمادها)
+
+Quiz style Android game to teach Arabic, intended for kids
+still in Alpha stage and needs more work.
