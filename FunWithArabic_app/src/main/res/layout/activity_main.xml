@@ -86,6 +86,12 @@
             android:onClick="ButtonsOnClick"
             android:layout_gravity="right|center_vertical" />
 
+        <SurfaceView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/surfaceViewAnimGuy"
+            android:layout_gravity="left|bottom" />
+
     </FrameLayout>
 
     <FrameLayout
@@ -95,21 +101,11 @@
         android:layout_weight=".1">
 
         <Button
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="New Button"
-            android:id="@+id/button2" />
+            android:layout_height="wrap_content"
+            android:text="Test button"
+            android:onClick="ButtonsOnClick"
+            android:id="@+id/btnTest" />
     </FrameLayout>
-<SurfaceView
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:id="@+id/surfaceViewAnimGuy"
-android:layout_alignParentBottom="true"
-android:layout_alignParentLeft="true"
-android:layout_alignParentStart="true"
-android:layout_below="@+id/btnAboutUs"
-android:layout_alignRight="@+id/btnExit"
-android:layout_alignEnd="@+id/btnExit" />
 
 </LinearLayout>
