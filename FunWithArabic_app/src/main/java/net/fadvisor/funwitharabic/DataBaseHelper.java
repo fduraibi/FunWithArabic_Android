@@ -13,23 +13,21 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ArrayAdapter;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    private static String DB_PATH;
-    private static String DB_NAME = "bayanat.db";
+    private final String DB_PATH;
+    private static final String DB_NAME = "bayanat.db";
     private static final int DB_VERSION = 1;
     private SQLiteDatabase myDataBase;
-    private Context myContext;
+    private final Context myContext;
 
     public DataBaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -39,19 +37,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         DB_PATH = context.getFilesDir().getAbsolutePath() + '/' + DB_NAME;
     }
 
-    public void createDataBase() throws IOException {
+    private void createDataBase() {
         //By calling this method an empty database will be created into the default system path
         //of the application so we are gonna be able to overwrite that database with our database.
 //        this.getReadableDatabase();
 //        this.getWritableDatabase();
-        try {
-            copyDataBase();
-        } catch (IOException e) {
-            throw new Error(e.getMessage());
-        }
+        copyDataBase();
     }
 
-    private void copyDataBase() throws IOException{
+    private void copyDataBase(){
         /*
          * Close SQLiteOpenHelper so it will commit the created empty database
          * to internal storage.
@@ -59,46 +53,56 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //close();
 
         //Open DB included in the APK file as the input stream
-        InputStream myAPKDB = myContext.getAssets().open(DB_NAME);
+        InputStream myAPKDB = null;
+        try {
+            myAPKDB = myContext.getAssets().open(DB_NAME);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //Open the new DB as the output stream
-        OutputStream myNewDB = new FileOutputStream(DB_PATH);
+        OutputStream myNewDB = null;
+        try {
+            myNewDB = new FileOutputStream(DB_PATH);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         //transfer bytes from the myAPKDB to the local DB myNewDB
         byte[] buffer = new byte[1024];
         int length;
-        while ((length = myAPKDB.read(buffer))>0){
-            myNewDB.write(buffer, 0, length);
+        if (myAPKDB != null && myNewDB != null) {
+            try {
+                while ((length = myAPKDB.read(buffer)) > 0){
+                    myNewDB.write(buffer, 0, length);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //getWritableDatabase().close();
+
+            // Force write of any data that might be buffered and close the streams
+            try {
+                myNewDB.flush();
+                myNewDB.close();
+                myAPKDB.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-        //getWritableDatabase().close();
-
-        // Force write of any data that might be buffered
-        myNewDB.flush();
-        // Close the streams
-        myNewDB.close();
-        myAPKDB.close();
     }
 
     public void openDataBase() throws SQLException {
         File myDBfile = new File(DB_PATH);
         if (!myDBfile.exists()) {
-            try {
-                createDataBase();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            createDataBase();
         }
         // THIS else IS FOR DEVELOPMENT ONLY TO RENEW THE DB file EVERY TIME, SHOULD BE REMOVED LATER
        /*
         else{
-
             myContext.deleteFile(DB_NAME); // delete the existing DB and create a new one
-            try {
-                createDataBase();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            createDataBase();
         }*/
 
         myDataBase = SQLiteDatabase.openDatabase(myDBfile.getAbsolutePath(), null, SQLiteDatabase.OPEN_READWRITE);
@@ -114,12 +118,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        // Do we need to check the DB version to see if it got updated?
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // TODO: Handle the upgrading of the database
     }
 
     // Add your public helper methods to access and get content from the database.
@@ -136,7 +140,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         mCursor.close();
         return count;
     }
-
 
     /**
      * @param name The player name
@@ -157,8 +160,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
        //         " VALUES ('"+ name +"','" +CA +"','"+WA+"','"+finalR+"');");
     }
 
-
-    public ArrayList getplayersnames(){
+    public ArrayList getPlayerNames(){
         Cursor cursor = myDataBase.rawQuery("SELECT name FROM results ORDER BY finalR DESC", null);
         ArrayList<String> list = new ArrayList<>();
         int index = cursor.getColumnIndex("name");
@@ -172,8 +174,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
+    // SHOULD GET RESULT BY ID NOT NAME, since same played can have multiple results
     public int[] getDataByName(String name){
-        Cursor cursor = myDataBase.rawQuery("SELECT CA,WA,finalR FROM results",null);
+        Cursor cursor = myDataBase.rawQuery("SELECT CA,WA,finalR FROM results WHERE name=?", new String[]{name});
 
         int CAindex = cursor.getColumnIndex("CA");
         int WAindex = cursor.getColumnIndex("WA");
@@ -189,7 +192,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             results[2] = cursor.getInt(FRindex);
             cursor.moveToNext();
         }
-
+        cursor.close();
         return results;
     }
 }

@@ -10,38 +10,37 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class results extends Activity {
+public class Results extends Activity {
 
-    ListView listView;
-    DataBaseHelper myDB;
-    ArrayList<String> items;
-    int results[];
+    private DataBaseHelper myDB;
+    private ArrayList<String> items;
+    private int results[];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        listView = (ListView)findViewById(R.id.listView);
+        ListView listView = (ListView) findViewById(R.id.listView);
 
         myDB = new DataBaseHelper(this);
         myDB.openDataBase();
 
 
-        items = myDB.getplayersnames();
+        items = myDB.getPlayerNames();
         if(items.isEmpty()){
             listView.setVisibility(View.INVISIBLE);
             Toast.makeText(this, "لا توجد نتائج مسجلة", Toast.LENGTH_LONG).show();
         }
         else {
-            listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items));
+            listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items));
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String playername = items.get(position);
-                results = myDB.getDataByName(playername);
-                showSelectedResult(playername,results[0],results[1],results[2]);
+                String playerName = items.get(position);
+                results = myDB.getDataByName(playerName);
+                showSelectedResult(playerName,results[0],results[1],results[2]);
             }
         });
     }

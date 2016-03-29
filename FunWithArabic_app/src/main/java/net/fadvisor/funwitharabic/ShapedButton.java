@@ -9,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -154,6 +153,8 @@ public class ShapedButton extends Button implements View.OnTouchListener {
                 if (pixelColor != 0) {
                     return false;
                 }
+                break;
+            default: //do nothing
                 break;
         }
         return true;

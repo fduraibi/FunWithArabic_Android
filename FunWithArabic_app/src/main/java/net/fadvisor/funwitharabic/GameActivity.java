@@ -60,10 +60,12 @@ public class GameActivity extends Activity {
     private int score_num;
 
     private ProgressBar progress; // The progress of the player (Max = NumberOfQ)
-    private int NumberOfQ; // Number of questions (It will be changeable before game starts)
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
 
-    {
         if (Build.VERSION.SDK_INT < 21) {
             //noinspection deprecation
             mySoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
@@ -75,12 +77,6 @@ public class GameActivity extends Activity {
 
             mySoundPool = new SoundPool.Builder().setAudioAttributes(attr).setMaxStreams(MAX_STREAMS).build();
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
 
         mySoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
 
@@ -121,7 +117,7 @@ public class GameActivity extends Activity {
         }
 
         // TODO: Make the NumberOfQ changeable before game start .
-
+        int NumberOfQ; // Number of questions (It will be changeable before game starts)
         NumberOfQ = 5;
         progress = (ProgressBar)findViewById(R.id.progress);
         progress.setMax(NumberOfQ);
@@ -149,7 +145,7 @@ public class GameActivity extends Activity {
         super.onDestroy();
     }
 
-    public void ButtonsOnClick(View v) {
+    public void buttonsOnClick(View v) {
         int Answer = -1;
         switch (v.getId()) {
             case R.id.btnBack:
@@ -181,6 +177,9 @@ public class GameActivity extends Activity {
 
             case R.id.btn3:
                 Answer = 3;
+                break;
+
+            default: //do nothing
                 break;
         }
 
@@ -224,7 +223,7 @@ public class GameActivity extends Activity {
         C_Answers_num = Integer.parseInt(C_Answers.getText().toString());
         W_Answers_num = Integer.parseInt(W_Answers.getText().toString());
         score_num = Integer.parseInt(score.getText().toString());
-        
+
         // TODO: add score to the database to show the best score
 
         /*
@@ -241,8 +240,15 @@ public class GameActivity extends Activity {
     private void fetchNewQ() {
         for (int i = 0; i < 4; i++) {
             StateListDrawable state_up = new StateListDrawable();
-            state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal));
-            state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal, null));
+                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed, null));
+            } else {
+                //noinspection deprecation
+                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal));
+                //noinspection deprecation
+                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed));
+            }
 
             if(Build.VERSION.SDK_INT < 16) {
                 //noinspection deprecation
@@ -257,9 +263,9 @@ public class GameActivity extends Activity {
         Cursor mCursor = myDB.getData(String.valueOf(rndValue.nextInt(DB_TOTAL) + 1));
         if (mCursor.getCount() > 0) {
             mCursor.moveToFirst();
-            String tmpQ = QParser(mCursor.getString(1));
+            String tmpQ = qParser(mCursor.getString(1));
             txtQ.setText(tmpQ);
-            txtQT.setText(QTParser(tmpQ));
+            txtQT.setText(qtParser(tmpQ));
             Collections.shuffle(rndList);
 
             correctA = (rndList.get(0)); // This one has the correct answer
@@ -273,11 +279,11 @@ public class GameActivity extends Activity {
         progress.setProgress(progress.getProgress() + 1);
     }
 
-    private String QParser(String strQ) {
+    private String qParser(String strQ) {
         return strQ.replace("*", "......");
     }
 
-    private String QTParser(String strQ) {
+    private String qtParser(String strQ) {
         // Remove all Tashkeel ( U+064B to U+0653 )
         return strQ.replaceAll("[\\u064B-\\u0653]", "");
     }

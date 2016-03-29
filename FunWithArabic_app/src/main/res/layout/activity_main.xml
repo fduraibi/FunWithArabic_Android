@@ -25,7 +25,7 @@
 
         <net.fadvisor.funwitharabic.ShapedButton
             android:id="@+id/btnStart"
-            android:onClick="ButtonsOnClick"
+            android:onClick="buttonsOnClick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             ShapedButton:color="#0000ff"
@@ -36,7 +36,7 @@
 
         <net.fadvisor.funwitharabic.ShapedButton
             android:id="@+id/btnExit"
-            android:onClick="ButtonsOnClick"
+            android:onClick="buttonsOnClick"
             android:layout_width="100dp"
             android:layout_height="110dp"
             ShapedButton:color="#888888"
@@ -49,7 +49,7 @@
 
         <net.fadvisor.funwitharabic.ShapedButton
             android:id="@+id/btnAboutUs"
-            android:onClick="ButtonsOnClick"
+            android:onClick="buttonsOnClick"
             android:layout_width="100dp"
             android:layout_height="110dp"
             android:text="@string/aboutus"
@@ -63,10 +63,10 @@
 
         <net.fadvisor.funwitharabic.ShapedButton
             android:id="@+id/btnPlayGames"
-            android:onClick="ButtonsOnClick"
+            android:onClick="buttonsOnClick"
             android:layout_width="100dp"
             android:layout_height="110dp"
-            android:text="Test"
+            android:text="@string/dummy"
             ShapedButton:pressedShift="10dp"
             ShapedButton:color="#00ffff"
             ShapedButton:normalBackground="@drawable/hex_button_white_normal"
@@ -83,7 +83,7 @@
             ShapedButton:normalBackground="@drawable/hex_button_white_normal"
             ShapedButton:pressedBackground="@drawable/hex_button_white_pressed"
             ShapedButton:color="#ff0000"
-            android:onClick="ButtonsOnClick"
+            android:onClick="buttonsOnClick"
             android:layout_gravity="right|center_vertical" />
 
     </FrameLayout>

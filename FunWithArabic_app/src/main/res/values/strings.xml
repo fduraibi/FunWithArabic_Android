@@ -15,5 +15,7 @@
     </string>
     <string name="btnNew">التالي</string>
     <string name="back">إرجع</string>
+    <string name="dummy">dummy</string>
+    <string name="zero">0</string>
 
 </resources>

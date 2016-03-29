@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public void ButtonsOnClick(View v) {
+    public void buttonsOnClick(View v) {
         switch (v.getId()) {
             case R.id.btnStart:
                 Intent intent = new Intent(this, GameActivity.class);
@@ -35,18 +35,24 @@ public class MainActivity extends Activity {
                 break;
             case R.id.btnAboutUs:
                 //TODO: Show about us
-                break;
-            case R.id.resultsbtn:
-//                startActivity(new Intent(this,results.class));
+
+                // START: This code is just for testing
                 ShapedButton btnStart = (ShapedButton) findViewById(R.id.btnStart);
                 if (btnStart.isEnabled()) {
                     btnStart.setEnabled(false);
                 } else {
                     btnStart.setEnabled(true);
                 }
+                // END: of testing code
+
+                break;
+            case R.id.resultsbtn:
+                startActivity(new Intent(this,Results.class));
                 break;
             case R.id.btnExit:
                 finish();
+                break;
+            default: //do nothing
                 break;
         }
     }
