@@ -1,6 +1,7 @@
 # Fun With Arabic تمتع مع العربية
 [![Build Status](https://travis-ci.org/fduraibi/FunWithArabic_Android.svg?branch=master)](https://travis-ci.org/fduraibi/FunWithArabic_Android)
 [![GPL License](https://img.shields.io/badge/license-GPL-blue.svg?style=flat)](https://github.com/fduraibi/FunWithArabic_Android/blob/master/LICENSE)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/d5383c4bc7954cf3a208026044e272ca)](https://www.codacy.com/app/fduraibi/FunWithArabic_Android)
 
 برنامج معد للاطفال بهدف تعليمهم اللغة العربية بطريقة المسابقات
 
