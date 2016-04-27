@@ -3,6 +3,7 @@ package net.fadvisor.funwitharabic;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -43,6 +44,8 @@ public class ShapedButton extends Button implements View.OnTouchListener {
         super.onFinishInflate();
         // Set the button background and color
         updateButton(normalButton);
+        // Set the padding so the Text will show up correctly on the initial load
+        this.setPadding(0, 0, 0, 0);
     }
 
     private void parseAttrs(Context context, AttributeSet attrs) {
@@ -74,7 +77,16 @@ public class ShapedButton extends Button implements View.OnTouchListener {
                 if (drawable != null) {
                     normalButton = drawable.mutate();
                     normalButton.setColorFilter(buttonColor, PorterDuff.Mode.MULTIPLY);
-                    bitmap = ((BitmapDrawable)normalButton).getBitmap();
+
+                    if(normalButton instanceof BitmapDrawable) {
+                        bitmap = ((BitmapDrawable)normalButton).getBitmap();
+                    } else{
+                        bitmap = Bitmap.createBitmap(normalButton.getIntrinsicWidth(),normalButton.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(bitmap);
+                        normalButton.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                        normalButton.draw(canvas);
+                    }
+
                 }
             } else if (attr == R.styleable.ShapedButton_pressedBackground) {
                 Drawable drawable = typedArray.getDrawable(attr);

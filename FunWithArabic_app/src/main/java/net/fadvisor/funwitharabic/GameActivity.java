@@ -195,7 +195,7 @@ public class GameActivity extends Activity {
 
     private void checkAnswer(int Answer) {
         if (Answer == correctA) {
-            btnA[Answer].setBackgroundResource(R.drawable.btn1_green_pressed);
+            //btnA[Answer].setBackgroundResource(R.drawable.btn1_green_pressed);
 
             C_Answers.setText(String.valueOf(C_Answers_num + 1));
             score.setText(String.valueOf(score_num + 1));
@@ -206,8 +206,8 @@ public class GameActivity extends Activity {
                 mySoundPool.play(sound_correct, 1, 1, 1, 0, 1);
             }
         } else {
-            btnA[Answer].setBackgroundResource(R.drawable.btn1_red_pressed);
-            btnA[correctA].setBackgroundResource(R.drawable.btn1_green_normal);
+            //btnA[Answer].setBackgroundResource(R.drawable.btn1_red_pressed);
+            //btnA[correctA].setBackgroundResource(R.drawable.btn1_green_normal);
 
             W_Answers.setText(String.valueOf(W_Answers_num + 1));
             score.setText(String.valueOf(score_num - 1));
@@ -238,25 +238,25 @@ public class GameActivity extends Activity {
         //TODO: maybe load next Q? after some wait?
     }
     private void fetchNewQ() {
-        for (int i = 0; i < 4; i++) {
-            StateListDrawable state_up = new StateListDrawable();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal, null));
-                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed, null));
-            } else {
-                //noinspection deprecation
-                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal));
-                //noinspection deprecation
-                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed));
-            }
-
-            if(Build.VERSION.SDK_INT < 16) {
-                //noinspection deprecation
-                btnA[i].setBackgroundDrawable(state_up);
-            } else {
-                btnA[i].setBackground(state_up);
-            }
-        }
+//        for (int i = 0; i < 4; i++) {
+//            StateListDrawable state_up = new StateListDrawable();
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal, null));
+//                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed, null));
+//            } else {
+//                //noinspection deprecation
+//                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal));
+//                //noinspection deprecation
+//                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed));
+//            }
+//
+//            if(Build.VERSION.SDK_INT < 16) {
+//                //noinspection deprecation
+//                btnA[i].setBackgroundDrawable(state_up);
+//            } else {
+//                btnA[i].setBackground(state_up);
+//            }
+//        }
 
         btnResult.setVisibility(View.INVISIBLE);
 
