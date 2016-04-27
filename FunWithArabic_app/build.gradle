@@ -19,5 +19,5 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:percent:23.3.0'
+    compile 'com.android.support:percent:23.2.1'
 }
