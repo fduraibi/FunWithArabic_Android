@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.StateListDrawable;
 import android.media.AudioAttributes;
@@ -35,7 +36,7 @@ public class GameActivity extends Activity {
     private static final int MAX_STREAMS = 1;
     private TextView txtQ;
     private TextView txtQT;
-    private Button btnA[] = new Button[4];
+    private ShapedButton btnA[] = new ShapedButton[4];
     private ImageButton btnResult;
     private int correctA;
     private List<Integer> rndList;   // Random list for the answers
@@ -102,10 +103,10 @@ public class GameActivity extends Activity {
         W_Answers = (TextView)findViewById(R.id.wrong_ans_count);
         score = (TextView)findViewById(R.id.result_count);
 
-        btnA[0] = (Button) findViewById(R.id.btn0);
-        btnA[1] = (Button) findViewById(R.id.btn1);
-        btnA[2] = (Button) findViewById(R.id.btn2);
-        btnA[3] = (Button) findViewById(R.id.btn3);
+        btnA[0] = (ShapedButton) findViewById(R.id.btn0);
+        btnA[1] = (ShapedButton) findViewById(R.id.btn1);
+        btnA[2] = (ShapedButton) findViewById(R.id.btn2);
+        btnA[3] = (ShapedButton) findViewById(R.id.btn3);
         btnResult = (ImageButton) findViewById(R.id.btnResult);
 
         // Set the font of these elements to Noto Naskh
@@ -134,6 +135,18 @@ public class GameActivity extends Activity {
         myDB = new DataBaseHelper(this);
         myDB.openDataBase();
         DB_TOTAL = myDB.getTotalRecords();
+        startNewGame();
+    }
+
+    private void startNewGame() {
+
+        // Reset all items to their initial values
+        progress.setProgress(0);
+        C_Answers.setText("0");
+        W_Answers.setText("0");
+        score.setText("0");
+
+        // Get a new question from the dataabse
         fetchNewQ();
     }
 
@@ -194,8 +207,14 @@ public class GameActivity extends Activity {
     }
 
     private void checkAnswer(int Answer) {
+        // Set all button to gray then color the correct and wrong ones
+        btnA[0].setColor(Color.LTGRAY);
+        btnA[1].setColor(Color.LTGRAY);
+        btnA[2].setColor(Color.LTGRAY);
+        btnA[3].setColor(Color.LTGRAY);
+
         if (Answer == correctA) {
-            //btnA[Answer].setBackgroundResource(R.drawable.btn1_green_pressed);
+            btnA[Answer].setColor(Color.GREEN);
 
             C_Answers.setText(String.valueOf(C_Answers_num + 1));
             score.setText(String.valueOf(score_num + 1));
@@ -206,8 +225,8 @@ public class GameActivity extends Activity {
                 mySoundPool.play(sound_correct, 1, 1, 1, 0, 1);
             }
         } else {
-            //btnA[Answer].setBackgroundResource(R.drawable.btn1_red_pressed);
-            //btnA[correctA].setBackgroundResource(R.drawable.btn1_green_normal);
+            btnA[Answer].setColor(Color.RED);
+            btnA[correctA].setColor(Color.GREEN);
 
             W_Answers.setText(String.valueOf(W_Answers_num + 1));
             score.setText(String.valueOf(score_num - 1));
@@ -218,7 +237,6 @@ public class GameActivity extends Activity {
                 mySoundPool.play(sound_wrong, 1, 1, 1, 0, 1);
             }
         }
-
 
         C_Answers_num = Integer.parseInt(C_Answers.getText().toString());
         W_Answers_num = Integer.parseInt(W_Answers.getText().toString());
@@ -238,25 +256,11 @@ public class GameActivity extends Activity {
         //TODO: maybe load next Q? after some wait?
     }
     private void fetchNewQ() {
-//        for (int i = 0; i < 4; i++) {
-//            StateListDrawable state_up = new StateListDrawable();
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal, null));
-//                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed, null));
-//            } else {
-//                //noinspection deprecation
-//                state_up.addState(new int[] {-android.R.attr.state_enabled},getResources().getDrawable(R.drawable.btn1_blue_normal));
-//                //noinspection deprecation
-//                state_up.addState(new int[]{android.R.attr.state_pressed}, getResources().getDrawable(R.drawable.btn1_blue_pressed));
-//            }
-//
-//            if(Build.VERSION.SDK_INT < 16) {
-//                //noinspection deprecation
-//                btnA[i].setBackgroundDrawable(state_up);
-//            } else {
-//                btnA[i].setBackground(state_up);
-//            }
-//        }
+        // Set default colors (matching the colors we set in the XML file)
+        btnA[0].setColor(Color.parseColor("#ff6666"));
+        btnA[1].setColor(Color.parseColor("#9cd4ff"));
+        btnA[2].setColor(Color.parseColor("#aaffaa"));
+        btnA[3].setColor(Color.parseColor("#c800ff"));
 
         btnResult.setVisibility(View.INVISIBLE);
 
@@ -295,17 +299,25 @@ public class GameActivity extends Activity {
         // Warn the player that exiting will cancel the score!! or maybe save the score and allow resuming
 
         // Add all strings to language strings to allow translations .
-        new AlertDialog.Builder(this)
-                .setMessage("هل أنت متأكد؟")
-                .setCancelable(false)
-                .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        finish();
-                        overridePendingTransition(R.animator.activity_anime2reverse, R.animator.activity_anime1reverse);
-                    }
-                })
-                .setNegativeButton("لا", null)
-                .show();
+//        new AlertDialog.Builder(this)
+//                .setMessage("هل أنت متأكد؟")
+//                .setCancelable(false)
+//                .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        finish();
+//                    }
+//                })
+//                .setNegativeButton("لا", null)
+//                .show();
+
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.animator.activity_anime2reverse, R.animator.activity_anime1reverse);
+
     }
 
     public void FinishTheGame(final int Correct, final int Wrong , final int result){
@@ -320,9 +332,7 @@ public class GameActivity extends Activity {
                 .setPositiveButton("إلعب مرة أخرى", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = getIntent();
-                        finish();
-                        startActivity(intent);
+                        startNewGame();
                     }
                 })
                 .setNeutralButton("احفظ النتيجة", new DialogInterface.OnClickListener() {

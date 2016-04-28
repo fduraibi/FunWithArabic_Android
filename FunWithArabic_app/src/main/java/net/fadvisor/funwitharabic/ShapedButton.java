@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -190,14 +191,11 @@ public class ShapedButton extends Button implements View.OnTouchListener {
         if (this.isEnabled()) {
             this.getBackground().setColorFilter(buttonColor, PorterDuff.Mode.MULTIPLY);
         } else {
-            int disabledColor;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                disabledColor = getResources().getColor(R.color.gray_light, null);
-            } else {
-                //noinspection deprecation
-                disabledColor = getResources().getColor(R.color.gray_light);
-            }
-            this.getBackground().setColorFilter(disabledColor, PorterDuff.Mode.MULTIPLY);
+            this.getBackground().setColorFilter(Color.LTGRAY, PorterDuff.Mode.MULTIPLY);
         }
+    }
+
+    public void setColor(int newColor) {
+        this.getBackground().setColorFilter(newColor, PorterDuff.Mode.MULTIPLY);
     }
 }
