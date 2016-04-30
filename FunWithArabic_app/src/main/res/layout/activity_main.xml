@@ -49,7 +49,7 @@
             ShapedButton:pressedBackground="@drawable/hex_button_white_pressed"
             android:text="@string/exit"
             android:layout_gravity="top|right"
-            app:layout_marginRightPercent="16%"
+            app:layout_marginRightPercent="17%"
             app:layout_marginTopPercent="18%" />
 
         <net.fadvisor.funwitharabic.ShapedButton
@@ -65,7 +65,7 @@
             ShapedButton:normalBackground="@drawable/hex_button_white_normal"
             ShapedButton:pressedBackground="@drawable/hex_button_white_pressed"
             android:layout_gravity="left|top"
-            app:layout_marginLeftPercent="16%"
+            app:layout_marginLeftPercent="17%"
             app:layout_marginTopPercent="18%" />
 
         <net.fadvisor.funwitharabic.ShapedButton
@@ -81,7 +81,7 @@
             ShapedButton:normalBackground="@drawable/hex_button_white_normal"
             ShapedButton:pressedBackground="@drawable/hex_button_white_pressed"
             android:layout_gravity="right|bottom"
-            app:layout_marginRightPercent="16%"
+            app:layout_marginRightPercent="17%"
             app:layout_marginBottomPercent="18%" />
 
         <net.fadvisor.funwitharabic.ShapedButton
@@ -97,8 +97,14 @@
             android:onClick="buttonsOnClick"
             android:layout_gravity="right|center_vertical" />
 
+        <SurfaceView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_widthPercent="50%"
+            app:layout_aspectRatio="100%"
+            android:id="@+id/surfaceViewAnimGuy"
+            android:layout_gravity="left|bottom" />
     </android.support.percent.PercentFrameLayout>
-
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -112,19 +118,9 @@
             android:layout_height="50dp"
             android:text="New Button"
             android:id="@+id/button2"
-            android:visibility="invisible" />
-    </FrameLayout>
+            android:visibility="visible" />
 
-    <SurfaceView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/surfaceViewAnimGuy"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btnAboutUs"
-        android:layout_alignRight="@+id/btnExit"
-        android:layout_alignEnd="@+id/btnExit" />
+    </FrameLayout>
 
 
 </LinearLayout>
