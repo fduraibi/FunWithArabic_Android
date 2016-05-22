@@ -19,3 +19,9 @@
 
 Quiz style Android game to teach Arabic, intended for kids
 still in Alpha stage and needs more work.
+
+للمزيد من المعلومات أو الرغبة في المساهمة راجع صفحة المشروع على الرابط
+
+http://www.fadvisor.net/blog/funwitharabic/
+
+او تواصل معي على [تويتر](https://twitter.com/Fahad_Alduraibi)
